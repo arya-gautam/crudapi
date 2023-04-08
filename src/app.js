@@ -33,14 +33,23 @@ var userSchema = new mongoose.Schema({
 
 var userModel=mongoose.model('registers',userSchema);
 //get all users
-app.get("/users", async (req,res)=>{
+app.get("/", async (req,res)=>{
     try {
-        const users = await userModel.find();
-        res.status(200).send(users);
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('Welcome To Easycampus');
            } catch (error) {
         res.status(400).send(error)
     }
     }); 
+
+    app.get("/users", async (req,res)=>{
+        try {
+            const users = await userModel.find();
+            res.status(200).send(users);
+               } catch (error) {
+            res.status(400).send(error)
+        }
+        }); 
 
 //get user by id
     app.get("/users/:id", async (req,res)=>{

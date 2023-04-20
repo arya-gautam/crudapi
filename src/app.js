@@ -13,7 +13,13 @@ require('dotenv').config();
 const mongoose = require("mongoose");
 require("../db/conn");
 
+var cors = require('cors')
+app.use(cors())
 
+
+var corsOptions = {
+    origin: '*',
+}
 
 // const { json } = require("stream/consumers");
 app.use(express.json());
@@ -33,7 +39,7 @@ var userSchema = new mongoose.Schema({
 
 var userModel=mongoose.model('registers',userSchema);
 //get all users
-app.get("/", async (req,res)=>{
+app.get("/",cors(corsOptions), async (req,res)=>{
     try {
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end('Welcome To Easycampus');
@@ -42,7 +48,7 @@ app.get("/", async (req,res)=>{
     }
     }); 
 
-    app.get("/users", async (req,res)=>{
+    app.get("/users",cors(corsOptions), async (req,res)=>{
         try {
             const users = await userModel.find();
             res.status(200).send(users);
@@ -52,7 +58,7 @@ app.get("/", async (req,res)=>{
         }); 
 
 //get user by id
-    app.get("/users/:id", async (req,res)=>{
+    app.get("/users/:id",cors(corsOptions), async (req,res)=>{
         try {
             const _id = req.params.id;
             const users = await userModel.findById(_id);
@@ -63,7 +69,7 @@ app.get("/", async (req,res)=>{
         });
 
     //add user 
-        app.post("/users", async (req,res)=>{
+        app.post("/users",cors(corsOptions), async (req,res)=>{
             try {
                 const password = req.body.password;
                 const cpassword = req.body.confirmpassword;
@@ -88,7 +94,7 @@ app.get("/", async (req,res)=>{
             }
             })
         //delete user by id 
-        app.delete("/users/:id", async (req,res)=>{
+        app.delete("/users/:id",cors(corsOptions), async (req,res)=>{
             try {
                 const _id = req.params.id;
                 const users = await userModel.findByIdAndDelete(_id);
@@ -98,7 +104,7 @@ app.get("/", async (req,res)=>{
             }
             }); 
         //update user by id
-        app.post("/users/:id",async(req,res)=>{
+        app.post("/users/:id",cors(corsOptions),async(req,res)=>{
             try{
                 const _id = req.params.id;
                 const users = await userModel.findByIdAndUpdate(_id,req.body,{new :true});

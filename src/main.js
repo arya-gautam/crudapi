@@ -54,10 +54,10 @@ app.use((req, res, next) => {
 */
 
 var config = {
-  key: process.env.EASEBUZZ_KEY,
-  salt: process.env.EASEBUZZ_SALT,
-  env: process.env.EASEBUZZ_ENV,
-  enable_iframe: process.env.EASEBUZZ_IFRAME,
+  key: process.env.EASEBUZZ_KEY || '2PBP7IABZ2',
+  salt: process.env.EASEBUZZ_SALT || 'DAH88E3UWQ',
+  env: process.env.EASEBUZZ_ENV || 'test',
+  enable_iframe: process.env.EASEBUZZ_IFRAME || 0,
 };
 
 

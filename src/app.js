@@ -131,7 +131,7 @@ app.get("/",cors(corsOptions), async (req,res)=>{
               
               
               //response 
-              app.post('/response', function (req, res) {
+              app.post('/response',cors(corsOptions),async (req, res) => {
                 function checkReverseHash(response) {
                   var hashstring = config.salt + "|" + response.status + "|" + response.udf10 + "|" + response.udf9 + "|" + response.udf8 + "|" + response.udf7 +
                     "|" + response.udf6 + "|" + response.udf5 + "|" + response.udf4 + "|" + response.udf3 + "|" + response.udf2 + "|" + response.udf1 + "|" +
@@ -150,7 +150,7 @@ app.get("/",cors(corsOptions), async (req,res)=>{
               
               
               //initiate_payment API
-              app.post('/initiate_payment', function (req, res) {
+              app.post('/initiate_payment',cors(corsOptions),async, (req, res)=> {
                 // var data = req.body;
                 var data = {
                   txnid: '786786bhjbj',
@@ -190,7 +190,7 @@ app.get("/",cors(corsOptions), async (req,res)=>{
               });
               
               //Transcation API  
-              app.post('/transaction', function (req, res) {
+              app.post('/transaction',cors(corsOptions),async (req, res)=> {
                 data = req.body;
                 var transaction = require('../Easebuzz/transaction.js');
                 transaction.transaction(data, config, res);
@@ -198,7 +198,7 @@ app.get("/",cors(corsOptions), async (req,res)=>{
               
               
               //Transcation Date API  
-              app.post('/transaction_date', function (req, res) {
+              app.post('/transaction_date',cors(corsOptions),async(req, res)=> {
               
                 data = req.body;
                 var transaction_date = require('../Easebuzz/tranaction_date.js');

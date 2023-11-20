@@ -150,7 +150,7 @@ app.get("/",cors(corsOptions), async (req,res)=>{
               
               
               //initiate_payment API
-              app.post('/initiate_payment',cors(corsOptions),async, (req, res)=> {
+              app.post('/initiate_payment',cors(corsOptions),async (req, res)=> {
                 // var data = req.body;
                 var data = {
                   txnid: '786786bhjbj',
